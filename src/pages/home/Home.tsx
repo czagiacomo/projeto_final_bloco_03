@@ -1,3 +1,6 @@
+import CategoryList from "../../components/category/categorylist/CategoryList";
+import CategoryModal from "../../components/category/categorymodal/CategoryModal";
+
 function Home() {
   return (
     <>
@@ -7,20 +10,19 @@ function Home() {
             src="https://media-public.canva.com/2DheE/MAFh1t2DheE/1/tl.png"
             className="max-w-sm  scale"
           />
-          <div className="m-12"/>
+          <div className="m-12" />
           <div className="">
             <h1 className="text-5xl font-bold">Farmácia Dracônica</h1>
             <p className="py-6">
               Os melhores preços do mercado para seu filhote de dragão!
             </p>
-            <a href="" target="_blank">
-              <button className="btn btn-primary w-1/2 py-2 mx-auto flex justify-center">
-                Compre agora!
-              </button>
-            </a>
+            <div>
+              <CategoryModal />
+            </div>
           </div>
         </div>
       </div>
+      <CategoryList />
     </>
   );
 }

@@ -1,0 +1,77 @@
+import { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
+import Category from "../../../models/Category";
+
+function CategoryDelete() {
+  const [category, setCategory] = useState<Category>({} as Category);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { id } = useParams<{ id: string }>();
+
+  async function searchById(id: string) {
+    useEffect(() => {
+      if (id !== undefined) {
+        searchById(id);
+      }
+    }, [id]);
+
+    async function deletarTema() {
+      setIsLoading(true);
+
+      setIsLoading(false);
+      retornar();
+    }
+
+    function retornar() {
+      //navigate("/categorys");
+    }
+
+    return (
+      <>
+        <div className="bg-base-100 min-h-screen my-4">
+          <div className="container flex flex-col items-center justify-center mx-auto ">
+            <h1 className="text-4xl text-center my-8 ">Deletar category</h1>
+            <p className="text-center font-semibold mb-4">
+              Você tem certeza de que deseja apagar o category a seguir?
+            </p>
+            <div className="card bg-neutral-content w-96 m-5 shadow-xl ">
+              <div className="card-body text-center">
+                <h2 className="card-title justify-center mb-4">Category</h2>
+                <p>{category.categoryName}</p>
+                <div className="card-actions grid grid-flow-col justify-stretch items-end pt-6">
+                  <button
+                    className=" btn btn-ghost text-slate-100 bg-error hover:bg-red-700"
+                    onClick={retornar}
+                  >
+                    Não
+                  </button>
+                  <button
+                    className="btn btn-ghost text-slate-100 bg-info hover:bg-indigo-800 "
+                    onClick={deletarTema}
+                  >
+                    {isLoading ? (
+                      <RotatingLines
+                        strokeColor="white"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        width="24"
+                        visible={true}
+                      />
+                    ) : (
+                      <span>Sim</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+export default CategoryDelete;
+function useParams<T>(): { id: any; } {
+    throw new Error("Function not implemented.");
+}
+
