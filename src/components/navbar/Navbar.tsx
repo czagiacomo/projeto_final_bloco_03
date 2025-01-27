@@ -61,7 +61,7 @@ function Navbar() {
               </label>
             </li>
             <li>
-            <Link to='/category' className='hover:underline'>Categorias</Link>
+            <Link to='/categories' className='hover:underline'>Categorias</Link>
             </li>
             <li>
               {/*<details>

@@ -13,10 +13,12 @@ function App() {
         <Navbar />
         <div className="min-h-[80vh]">
           <Routes>
+          <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/category" element={<CategoryList />} />
-            <Route path="/cadastrarcategoria" element={<CategoryForm />} />
-            <Route path="/deletar" element={<CategoryDelete />} />
+            <Route path="/categories" element={<CategoryList />} />
+            <Route path="/create" element={<CategoryForm />} />
+            <Route path="/update/:id" element={<CategoryForm />} />
+            <Route path="/delete/:id" element={<CategoryDelete />} />
           </Routes>
         </div>
         <Footer />

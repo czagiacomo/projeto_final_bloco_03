@@ -1,14 +1,15 @@
 import { ChangeEvent, useState } from "react";
 import { create, update } from "../../../services/Service";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Category from "../../../models/Category";
 import { RotatingLines } from "react-loader-spinner";
 
 function CategoryForm() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const [category, setCategory] = useState<Category>({
-    id: 0,
+    id: id,
     categoryName: "",
   });
 
@@ -16,12 +17,9 @@ function CategoryForm() {
     e.preventDefault();
     setIsLoading(true);
 
-    console.log("category:", category);
-
     if (id !== undefined) {
       try {
-        await update(`/categories`, category, setCategory);
-
+        await update(`/${id}`, category, setCategory);
         alert("Categoria atualizada com sucesso");
       } catch (error: any) {
         setIsLoading(false);
@@ -46,7 +44,7 @@ function CategoryForm() {
     }
 
     setIsLoading(false);
-    //retornar();
+    retornar();
   }
 
   function updateCategoryState(e: ChangeEvent<HTMLInputElement>) {
@@ -54,6 +52,10 @@ function CategoryForm() {
       ...category,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function retornar() {
+    navigate("/categories");
   }
 
   //const loadingCategory = category.categoryName === "";
@@ -70,9 +72,9 @@ function CategoryForm() {
             name="categoryName"
             className="border-2 border-slate-700 rounded p-2"
             value={category.categoryName}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  updateCategoryState(e)
-                }
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              updateCategoryState(e)
+            }
           />
         </div>
         <button

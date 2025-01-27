@@ -4,6 +4,7 @@ const api = axios.create({
   baseURL: "http://localhost:8080",
 });
 
+
 export const getAll = async (url: string, setData: Function) => {
   const response = await api.get(url);
   setData(response.data);
@@ -21,4 +22,9 @@ export const update = async (url: string, data: Object, setData: Function) => {
 
 export const delet = async (url: string) => {
   await api.delete(url);
+};
+
+export const search = async (url: string, setDados: Function) => {
+  const resposta = await api.get(url);
+  setDados(resposta.data);
 };

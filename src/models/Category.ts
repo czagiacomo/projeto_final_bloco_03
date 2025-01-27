@@ -1,7 +1,7 @@
 import Product from "./Product";
 
 export default interface Category {
-  id: number;
+  id: string | undefined;
   categoryName: string;
   product?: Product | null;
 }
