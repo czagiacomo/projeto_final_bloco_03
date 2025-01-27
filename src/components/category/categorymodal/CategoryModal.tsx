@@ -1,6 +1,8 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+
 import CategoryForm from "../categoryform/CategoryForm";
+import "./CategoryModal.css";
 
 function CategoryModal() {
   return (

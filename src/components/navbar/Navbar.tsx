@@ -1,6 +1,7 @@
 
 import { Asclepius } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isdark, setIsdark] = useState<boolean>(() => {
@@ -17,9 +18,7 @@ function Navbar() {
       <div className="navbar bg-base-100">
         <div className="flex-1 py-2 px-1">
           <Asclepius size={48} color="#002f61" weight="duotone" />
-          <a href="/" className="btn btn-ghost text-xl font-semibold">
-            Farmácia Digital
-          </a>
+          <Link to='/home' className="text-2xl font-bold">Farmácia Dracônica</Link>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1 text-base">
@@ -62,7 +61,7 @@ function Navbar() {
               </label>
             </li>
             <li>
-              <a href="">Placeholder</a>
+            <Link to='/category' className='hover:underline'>Categorias</Link>
             </li>
             <li>
               {/*<details>

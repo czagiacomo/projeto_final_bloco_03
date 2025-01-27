@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import Category from "../../../models/Category";
+import { delet } from "../../../services/Service";
+import { useNavigate, useParams } from "react-router-dom";
 
 function CategoryDelete() {
+  const navigate = useNavigate();
   const [category, setCategory] = useState<Category>({} as Category);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -15,22 +18,35 @@ function CategoryDelete() {
       }
     }, [id]);
 
-    async function deletarTema() {
-      setIsLoading(true);
+    async function deleteCategory(id: string) {
+      
+      try {
+        await delet(`/temas/${id}`
+          
+        );
+
+        alert("Categoria apagada com sucesso");
+      } catch (error: any) {
+        if (error.toString().includes("403")) {
+          console.log("logout");
+        } else {
+          alert("Erro ao deletar a categoria.");
+        }
+      }
 
       setIsLoading(false);
       retornar();
     }
 
     function retornar() {
-      //navigate("/categorys");
+      navigate("/categories");
     }
 
     return (
       <>
         <div className="bg-base-100 min-h-screen my-4">
           <div className="container flex flex-col items-center justify-center mx-auto ">
-            <h1 className="text-4xl text-center my-8 ">Deletar category</h1>
+            <h1 className="text-4xl text-center my-8 ">Delete category</h1>
             <p className="text-center font-semibold mb-4">
               Você tem certeza de que deseja apagar o category a seguir?
             </p>
@@ -47,7 +63,7 @@ function CategoryDelete() {
                   </button>
                   <button
                     className="btn btn-ghost text-slate-100 bg-info hover:bg-indigo-800 "
-                    onClick={deletarTema}
+                    onClick={deleteCategory}
                   >
                     {isLoading ? (
                       <RotatingLines
@@ -70,8 +86,5 @@ function CategoryDelete() {
     );
   }
 }
-export default CategoryDelete;
-function useParams<T>(): { id: any; } {
-    throw new Error("Function not implemented.");
-}
 
+export default CategoryDelete;
